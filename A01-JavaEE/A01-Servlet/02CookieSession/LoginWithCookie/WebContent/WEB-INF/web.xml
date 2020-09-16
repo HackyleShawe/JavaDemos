@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>04-LoginWithCookie</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <servlet>
+  	<servlet-name>FirstLogin</servlet-name>
+  	<servlet-class>login.FirstLogin</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>FirstLogin</servlet-name>
+  	<url-pattern>/FirstLogin</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+  	<servlet-name>SecondLogin</servlet-name>
+  	<servlet-class>login.SecondLogin</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>SecondLogin</servlet-name>
+  	<url-pattern>/SecondLogin</url-pattern>
+  </servlet-mapping>
+</web-app>

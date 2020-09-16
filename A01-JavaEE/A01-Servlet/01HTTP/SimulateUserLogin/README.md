@@ -99,11 +99,11 @@ INSERT INTO myuser(id,username,PASSWORD,email)
 
 在浏览器中输入：
 
-> http://localhost:8080/01-SimulateUserLoginWithServlet/login.html
+> http://localhost:8080/SimulateUserLogin/login.html
 
 点击登录后，会跳转到以下页面：
 
-> http://localhost:8080/01-SimulateUserLoginWithServlet/login
+> http://localhost:8080/SimulateUserLogin/login
 
 如果成功登录，会显示成功登录信息（我选择登录的是tom）：
 
