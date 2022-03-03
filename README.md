@@ -1,6 +1,3 @@
-# Java Web Demonstration
-The Java Web Engineer Project Demonstrations For Beginner
-
 
 
 **仓库的意义与目的：**
@@ -11,31 +8,13 @@ The Java Web Engineer Project Demonstrations For Beginner
 
 
 
-# Java EE
+TODO...
 
 
 
-## Servlet
-
-**模拟用户登录：SimulateUserLogin**
-
-1. 第一个Servlet小项目
-2. 使用数据库，DBUtils
 
 
 
-**统计登录数：CountLoginNumber**
-
-1. ServletContext域对象的使用
 
 
 
-**文件下载和上传：FileUploadDownload**
-
-1. Servlet 3.0版本，Part类的使用
-
-
-
-**使用Cookie登录：LoginWithCookie**
-
-**使用Cookie登录注销：LogoutWithCookie**
