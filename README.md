@@ -1,20 +1,26 @@
+- **Java Web开发中（Java EE、Spring生态）常用的项目骨架、示例、组件整合样例。**
+
+- **Java Web(Java EE and Spring Ecosystem) Project Frameworks, Examples, Components Integration. For Beginner.**
+
+**仓库的目标：**
+
+- 秉承着"简单"和"容易"这两项原则，将Java Web开发中常用的组件，**拆分**为一个个可直接**独立运行**的小项目
+- 对于每一个小项目，都能够运行起来，可以直接**看到效果**
+- 仓库中的各个模块代码，可**直接复用**
+
+**重要说明**
+
+- 每个模块的详细说明、技术细节，在我的个人技术博客中（https://blog.hackyle.com）
+- 本仓库只存储完整的代码
+- 每个模块的Readme文件中有最重要的关键说明
+
+# Components Integration
 
 
-**仓库的意义与目的：**
 
-- 秉承着"简单"和"容易"这两项原则，我将Java Web中的重要的、较难的知识模块进行拆分，写成一个个独立的、可直接运行的小项目。
-- 对于每一个小项目，都能够运行起来，让效果呈现出来。
-- 尝试着把一个知识点讲得"简单"，尝试让初学者觉得更"容易"。
+# Examples
 
 
 
-TODO...
-
-
-
-
-
-
-
-
+# Project Frameworks
 
