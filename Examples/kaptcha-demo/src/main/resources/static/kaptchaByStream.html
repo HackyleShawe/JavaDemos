@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>验证码</title>
+  <style>
+    .mainContainer {
+      text-align: center;
+      height: 200px;
+      margin: auto;
+      /*background-color: darkseagreen;*/
+    }
+    div {
+      margin-top: 6px;
+    }
+  </style>
+  <script>
+    function uuid() {
+      function S4() {
+        return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+      }
+      let uuidTmp = (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+
+      //把UUID暂存起来，在请求后端的验证码正确性校验接口时需要携带
+      window.localStorage.setItem("uuid", uuidTmp)
+      return uuidTmp;
+    }
+  </script>
+</head>
+
+<body>
+<div class="mainContainer">
+  <div>
+    <!-- 注意：onerror标签会在src出错时立即调用，所以uuid函数必须在前面，不能在后面，否则根本找不到该函数 -->
+    <img alt="验证码" src="" onerror="this.src='/codeByStream?uuid='+uuid()" onclick="this.src='/codeByStream?uuid='+uuid()">
+    <a>看不清？点击图片刷新一下</a>
+  </div>
+  <div><input type="text" id="code" placeholder="Input Verification Code Place" size="70"></div>
+  <div>
+    <button id="submit">Submit</button>
+    <span id="verificationResult"></span>
+  </div>
+</div>
+
+</body>
+<script src="/plugin/jquery-1.12.4.min.js"></script>
+<script>
+  //提交
+  $("#submit").click(function () {
+    let uuid = window.localStorage.getItem("uuid")
+    $.get("/checkCode", {"code": $("#code").val(), "uuid":uuid},
+        function (data) {
+          $("#verificationResult").html(data)
+        }
+    )
+  });
+</script>
+</html>

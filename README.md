@@ -20,6 +20,13 @@
 
 # Examples
 
+**kaptcha-demo**
+
+- Kaptcha 是一个Google开源、可自由配置的图片验证码生成工具
+- Kaptcha在SpringBoot环境下的用法实例
+- 完整项目：[kaptcha-demo](./Examples/kaptcha-demo)
+- 详细博文：https://blog.hackyle.com/article/java-demo/kaptcha
+
 
 
 # Project Frameworks
