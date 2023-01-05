@@ -1,0 +1,20 @@
+server:
+  port: 9898
+  servlet:
+    context-path: /
+
+spring:
+  servlet:
+    multipart: #文件上传限制
+      enabled: true
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+#MinIO对象存储，文件服务器
+minio:
+  endpoint: http://127.0.0.1:9000/ # 外网API，文件上传地址（只支持IP，不支持域名）
+  access-key: kyle-minio
+  secret-key: hackyle-minio
+  file-obj-domain: http://127.0.0.1:9000/ #外网访问文件对象的域，例如：https://res.hackyle.com/
+  endpoint-in: http://127.0.0.1:9000/ # 内网API
+  bucket-name: hello-minio #本个项目所用的桶名

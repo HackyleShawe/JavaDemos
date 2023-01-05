@@ -27,6 +27,15 @@
 - 完整项目：[kaptcha-demo](./Examples/kaptcha-demo)
 - 详细博文：https://blog.hackyle.com/article/java-demo/kaptcha
 
+**minio-demo**
+
+- MinIO是一款高性能的分布式对象存储服务解决方案，常作为Web服务的文件存储服务器，提供文件的上传和下载功能。
+- MinIO整合SpringBoot示例
+- 完整项目：[minio-demo](./Examples/minio-demo)
+- 详细博文：https://blog.hackyle.com/article/java-demo/minio-demo
+
+
+
 
 
 # Project Frameworks
