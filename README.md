@@ -49,3 +49,11 @@
 
 # Project Frameworks
 
+
+
+**spring-springmvc-mybatis**
+
+- Spring+SpringMVC+MyBatis整合示例
+- 完整项目：[spring-springmvc-mybatis](./ProjectFrameworks/spring-springmvc-mybatis)
+- ReadMe：[README.md](./ProjectFrameworks/spring-springmvc-mybatis/README.md)
+
