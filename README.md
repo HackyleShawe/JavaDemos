@@ -27,6 +27,15 @@
 
 
 
+**springcache-redis**
+
+- SpringCache整合Redis示例
+- 它们之间的关系：SpringCache是Spring对缓存的一种规范。Redis才是真正进行缓存的具体工具。可以类比： JDBC规范与实现该规范的MySQL驱动（com.mysql.cj.jdbc.Driver）一样
+- 完整项目：[springcache-redis](./ComponentsIntegration/springcache-redis)
+- 详细博文：https://blog.hackyle.com/article/java-demo/springcache-redis
+
+
+
 # Examples
 
 **kaptcha-demo**
