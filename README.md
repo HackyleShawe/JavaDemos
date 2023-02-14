@@ -52,7 +52,13 @@
 - 完整项目：[minio-demo](./Examples/minio-demo)
 - 详细博文：https://blog.hackyle.com/article/java-demo/minio-demo
 
+**spring-starter-demo**
 
+- 第一个starter实例
+
+- **自定义与实现一个redis-starter，实现自动装配Jedis**
+- 完整项目：[spring-starter-demo](./Examples/spring-starter-demo)
+- ReadMe：[README.md](./Examples/spring-starter-demo/README.md)
 
 
 
