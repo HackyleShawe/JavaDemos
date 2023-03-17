@@ -55,8 +55,7 @@
 **spring-starter-demo**
 
 - 第一个starter实例
-
-- **自定义与实现一个redis-starter，实现自动装配Jedis**
+- 自定义与实现一个redis-starter，实现自动装配Jedis
 - 完整项目：[spring-starter-demo](./Examples/spring-starter-demo)
 - ReadMe：[README.md](./Examples/spring-starter-demo/README.md)
 
@@ -71,4 +70,10 @@
 - Spring+SpringMVC+MyBatis整合示例
 - 完整项目：[spring-springmvc-mybatis](./ProjectFrameworks/spring-springmvc-mybatis)
 - ReadMe：[README.md](./ProjectFrameworks/spring-springmvc-mybatis/README.md)
+
+**frontend-maven-package-plugin-demo**
+
+- 前后端统一打包Maven插件
+- 完整项目：[frontend-maven-package-plugin-demo](./ProjectFrameworks/frontend-maven-package-plugin-demo)
+- ReadMe：[README.md](./ProjectFrameworks/frontend-maven-package-plugin-demo/README.md)
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>backend-frontend-package</artifactId>
+        <groupId>com.hackyle</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <!--
+    对应Vue项目而言，pom.xml对它而言是不存在的，也是毫无意义的，此文件可以不要。
+    在此体现出来，只是为了配置子父工程而已，凸显出Vue工程属于父工程的子工程而已，便于IDE导入呈现展示而已。
+    -->
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>frontend-demo</artifactId>
+
+</project>

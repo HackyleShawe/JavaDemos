@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>backend-frontend-package</artifactId>
+        <groupId>com.hackyle</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>backend-demo</artifactId>
+
+    <!--指定打包方式，便于打包插件spring-boot-maven-plugin对代码进行打包-->
+    <packaging>jar</packaging>
+
+    <properties>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+
+        <!--依次指定前端的运行环境的版本-->
+        <frontend-maven-plugin.version>1.12.1</frontend-maven-plugin.version>
+        <maven-frontend-plugin.nodeVersion>v16.17.0</maven-frontend-plugin.nodeVersion>
+        <maven-frontend-plugin.npmVersion>8.5.0</maven-frontend-plugin.npmVersion>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+            <!-- 清除插件maven-clean-plugin，用于在编译前，清除之前编译的文件、文件夹等，避免残留之前的内容 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <!-- 前端资源目录，即：存放前端包目录-->
+                            <directory>src/main/resources/public</directory>
+                        </fileset>
+                        <fileset>
+                            <!-- Vue项目打包自动生成的dist目录 -->
+                            <directory>${project.parent.basedir}/frontend-demo/dist</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+
+            <!--前端打包插件frontend-maven-plugin，为项目本地下载/安装Node和NPM，运行npm install命令-->
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>${frontend-maven-plugin.version}</version>
+                <configuration>
+                    <!-- 指定这个plugin的工作目录，相当于进入前端项目的目录：cd frontend-demo -->
+                    <workingDirectory>${project.parent.basedir}/frontend-demo</workingDirectory>
+
+                    <!-- 可选配置，指定node下载地址和版本 -->
+                    <!-- <nodeDownloadRoot>https://registry.npmmirror.com/-/binary/node/</nodeDownloadRoot> -->
+                    <nodeVersion>${maven-frontend-plugin.nodeVersion}</nodeVersion>
+
+                    <!-- 可选配置，指定npm下载地址和版本 -->
+                    <!-- <npmDownloadRoot>https://registry.npmmirror.com/-/binary/npm/</npmDownloadRoot> -->
+                    <npmVersion>${maven-frontend-plugin.npmVersion}</npmVersion>
+                </configuration>
+
+                <!--
+                主要步骤：
+                  1.安装node环境和npm环境
+                  2.安装前端项目的依赖：npm install
+                  3.构建项目：npm run build
+                -->
+                <executions>
+                    <!--安装node环境和npm环境-->
+                    <execution>
+                        <id>install node and npm</id>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <configuration>
+                            <!--这里可以覆盖上文的configuration标签中指定了nodeVersion-->
+                            <nodeVersion>${maven-frontend-plugin.nodeVersion}</nodeVersion>
+                        </configuration>
+                    </execution>
+
+                    <!--安装前端项目的依赖：npm install-->
+                    <execution>
+                        <id>npm install</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <!-- optional: default phase is "generate-resources" -->
+                        <phase>generate-resources</phase>
+                        <!-- Optional configuration which provides for running any npm command -->
+                        <configuration>
+                            <arguments>install</arguments>
+                            <npmRegistryURL>http://registry.npmmirror.com/</npmRegistryURL>
+                        </configuration>
+                    </execution>
+
+                    <!-- 构建项目 -->
+                    <execution>
+                        <id>npm run build</id>
+                        <goals>
+                            <goal>npm</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--资源插件maven-resources-plugin，主要为了从前端项目里复制打包好的文件到springboot项目-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <id>copy static</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <!-- 复制前端打包文件到后端项目的public（static亦可） -->
+                            <outputDirectory>src/main/resources/public</outputDirectory>
+                            <overwrite>true</overwrite>
+                            <resources>
+                                <resource>
+                                    <!-- 从前端打包的目录dist进行指定文件、文件夹内容的复制-->
+                                    <directory>${project.parent.basedir}/frontend-demo/dist</directory>
+                                    <includes>
+                                        <!-- 具体根据实际前端代码、及目录结构进行配置-->
+                                        <include>css/</include>
+                                        <include>fonts/</include>
+                                        <include>img/</include>
+                                        <include>js/</include>
+                                        <include>favicon.ico</include>
+                                        <include>index.html</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--打包插件spring-boot-maven-plugin，将项目达成Jar或War包-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- repackage可以把依赖的包都打包到生成的Jar包中 -->
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
