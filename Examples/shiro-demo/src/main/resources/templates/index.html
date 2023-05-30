@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+</head>
+<body>
+<h3>主页</h3>
+
+<!--如果user.username不为空-->
+<span th:if="${user.username}">
+        <span th:text="'恭喜' + ${user.username} + '登录成功'"></span>
+        <a th:href="@{/logout}">注销</a>
+    </span>
+
+<!--如果user.username为空-->
+<span th:unless="${user.username}">
+        你好，请<a href="/login" th:href="@{/login}">登录</a>
+    </span>
+
+<h3>权限</h3>
+<a href="#" th:href="@{/resource/create}">模拟 增 权限</a> <br/>
+<a href="#" th:href="@{/resource/delete}">模拟 删 权限</a> <br/>
+<a href="#" th:href="@{/resource/update}">模拟 改 权限</a> <br/>
+<a href="#" th:href="@{/resource/read}">模拟 查 权限</a> <br/>
+</body>
+</html>
