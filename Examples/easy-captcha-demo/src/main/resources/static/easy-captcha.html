@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>验证码</title>
+  <style>
+    .mainContainer {
+      text-align: center;
+      height: 200px;
+      margin: auto;
+      /*background-color: darkseagreen;*/
+    }
+    div {
+      margin-top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="mainContainer">
+  <div>
+    <img alt="验证码" id="codeImg" src="" >
+    <a>看不清？点击图片刷新一下</a>
+  </div>
+  <div><input type="text" id="code" placeholder="Input Verification Code Place" size="70"></div>
+  <div>
+    <button id="submit">Submit</button>
+    <span id="verificationResult"></span>
+  </div>
+</div>
+</body>
+<script src="/plugin/jquery-1.12.4.min.js"></script>
+<script>
+  $(function () {
+    fetchCode()
+  })
+
+  //请求后端获取验证码图片
+  function fetchCode() {
+    $.get("/captcha", function (data) {
+      //后端直接返回一个字符串，无法直接解析为JSON，需要显示转换。如果后端返回一个Object，则可以解析为JSON
+      let objData = JSON.parse(data)
+      //console.log("obj", objData)
+      $("#codeImg").attr("src", objData.img)
+
+      //把UUID暂存起来，在请求后端的验证码正确性校验接口时需要携带
+      window.localStorage.setItem("key", objData.key)
+    })
+  }
+  //点击刷新
+  $("#codeImg").click(function () {
+    fetchCode()
+  })
+
+  //提交
+  $("#submit").click(function () {
+    let key = window.localStorage.getItem("key")
+    $.get("/login", {"verCode": $("#code").val(), "key":key},
+        function (data) {
+          $("#verificationResult").html(data)
+        }
+    )
+  });
+</script>
+</html>

@@ -38,12 +38,12 @@
 
 # Examples
 
-**kaptcha-demo**
+**spring-starter-demo**
 
-- Kaptcha 是一个Google开源、可自由配置的图片验证码生成工具
-- Kaptcha在SpringBoot环境下的用法实例
-- 完整项目：[kaptcha-demo](./Examples/kaptcha-demo)
-- 详细博文：https://blog.hackyle.com/article/java-demo/kaptcha
+- 第一个starter实例
+- 自定义与实现一个redis-starter，实现自动装配Jedis
+- 完整项目：[spring-starter-demo](./Examples/spring-starter-demo)
+- ReadMe：[README.md](./Examples/spring-starter-demo/README.md)
 
 **minio-demo**
 
@@ -52,12 +52,33 @@
 - 完整项目：[minio-demo](./Examples/minio-demo)
 - 详细博文：https://blog.hackyle.com/article/java-demo/minio-demo
 
-**spring-starter-demo**
 
-- 第一个starter实例
-- 自定义与实现一个redis-starter，实现自动装配Jedis
-- 完整项目：[spring-starter-demo](./Examples/spring-starter-demo)
-- ReadMe：[README.md](./Examples/spring-starter-demo/README.md)
+
+## 验证码
+
+**kaptcha-demo**
+
+- Kaptcha 是一个Google开源、可自由配置的图片验证码生成工具
+- Kaptcha在SpringBoot环境下的用法实例
+- 功能特性：支持**英文、数字**的验证码
+- 完整项目：[kaptcha-demo](./Examples/kaptcha-demo)
+- 详细博文：https://blog.hackyle.com/article/java-demo/kaptcha
+
+**easy-captcha-demo**
+
+- easy-captcha整合SpringBoot环境的用法实例
+- 功能特性：支持**英文数字、算术、中文字符、闪图**的验证码
+- 完整项目：[easy-captcha-demo](./Examples/easy-captcha-demo)
+- ReadMe：[README.md](./Examples/easy-captcha-demo/README.md)
+
+**aj-captcha-demo**
+
+- aj-captcha整合SpringBoot环境的用法实例
+- 功能特性：支持**滑动拼图、文字点选**的验证码
+- 完整项目：[aj-captcha-demo](./Examples/aj-captcha-demo)
+- ReadMe：[README.md](./Examples/aj-captcha-demo/README.md)
+
+
 
 
 

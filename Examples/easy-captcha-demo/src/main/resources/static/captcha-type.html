@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>验证码</title>
+  <style>
+    .mainContainer {
+      text-align: center;
+      height: 200px;
+      margin: auto;
+      /*background-color: darkseagreen;*/
+    }
+    div {
+      margin-top: 6px;
+    }
+  </style>
+</head>
+
+<body>
+<div class="mainContainer">
+  <div>
+    <img alt="验证码" id="png" src="" >
+  </div>
+  <hr/>
+
+  <div>
+    <img alt="验证码" id="gif"  src="" >
+  </div>
+  <hr/>
+
+  <div>
+    <img alt="验证码" id="chinese" src="" >
+  </div>
+  <hr/>
+
+  <div>
+    <img alt="验证码" id="chineseGif" src="" >
+  </div>
+  <hr/>
+
+  <div>
+    <img alt="验证码" id="arithmetic" src="" >
+  </div>
+  <hr/>
+
+</div>
+</body>
+<script src="/plugin/jquery-1.12.4.min.js"></script>
+<script>
+  $(function () {
+    png()
+    gif()
+    chinese()
+    chineseGif()
+    arithmetic()
+  })
+
+  //请求后端获取验证码图片
+  function png() {
+    $.get("/captcha/png", function (data) {
+      //console.log("obj", data)
+      $("#png").attr("src", data.img)
+
+      //把UUID暂存起来，在请求后端的验证码正确性校验接口时需要携带
+      window.localStorage.setItem("key", data.key)
+    })
+  }
+
+  function gif() {
+    $.get("/captcha/gif", function (data) {
+      $("#gif").attr("src", data.img)
+      window.localStorage.setItem("key", data.key)
+    })
+  }
+
+  function chinese() {
+    $.get("/captcha/chinese", function (data) {
+      $("#chinese").attr("src", data.img)
+      window.localStorage.setItem("key", data.key)
+    })
+  }
+
+  function chineseGif() {
+    $.get("/captcha/chineseGif", function (data) {
+      $("#chineseGif").attr("src", data.img)
+      window.localStorage.setItem("key", data.key)
+    })
+  }
+
+  function arithmetic() {
+    $.get("/captcha/arithmetic", function (data) {
+      $("#arithmetic").attr("src", data.img)
+      window.localStorage.setItem("key", data.key)
+    })
+  }
+</script>
+</html>
