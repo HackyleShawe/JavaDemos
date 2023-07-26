@@ -59,6 +59,14 @@
 - 完整项目：[shiro-demo](./Examples/shiro-demo)
 - ReadMe：[README.md](./Examples/shiro-demo/README.md)
 
+**multi-options-storage-query-demo**
+
+- 一种多选项的存储与高效查询的解决方案
+- 完整项目：[multi-options-storage-query-demo](./Examples/multi-options-storage-query-demo)
+- ReadMe：[README.md](./Examples/multi-options-storage-query-demo/README.md)
+
+
+
 ## 验证码
 
 **kaptcha-demo**
