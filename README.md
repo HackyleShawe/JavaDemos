@@ -34,7 +34,12 @@
 - 完整项目：[springcache-redis](./ComponentsIntegration/springcache-redis)
 - 详细博文：https://blog.hackyle.com/article/java-demo/springcache-redis
 
+**valid-validated-demo**
 
+- valid与validated的使用示例
+- valid是一种Java规范，Hibernate-validator对其进行了实现；validated是Spring的一种校验机制
+- 完整项目：[valid-validated-demo](./ComponentsIntegration/valid-validated-demo)
+- 详细博文：https://blog.hackyle.com/article/java-demo/valid-validated-demo
 
 # Examples
 

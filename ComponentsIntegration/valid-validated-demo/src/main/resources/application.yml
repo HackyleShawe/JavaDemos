@@ -1,0 +1,12 @@
+server:
+  port: 7878
+  servlet:
+    context-path: /
+
+#spring:
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/kdb?characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+#    username: root
+#    password: hackyle
+
