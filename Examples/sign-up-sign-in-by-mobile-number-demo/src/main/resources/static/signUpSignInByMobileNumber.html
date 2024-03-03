@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过手机号实现注册或登录</title>
+    <style>
+        .mainContainer {
+            text-align: center;
+            height: 200px;
+            margin: auto;
+            /*background-color: darkseagreen;*/
+        }
+        div {
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="mainContainer">
+    <div>
+        手机号：
+        <input type="text" id="mobilePhone" placeholder="Input Mobile Number Place" size="70">
+    </div>
+    <div>
+        <img alt="验证码" id="codeImg" src="" >
+        <a>看不清？点击图片刷新一下</a>
+    </div>
+    <div>
+        图形验证码：
+        <input type="text" id="verifyCode" placeholder="Input Verification Code Place" size="70">
+    </div>
+    <div>
+        <button id="sendSmsCode">Send SMS Code</button>
+        <span id="sendSmsCodeResult" style="background: aqua"></span>
+    </div>
+    <div>
+        短信验证码：
+        <input type="text" id="smsCode" placeholder="Input SMS Code Place" size="70">
+    </div>
+    <div>
+        <button id="signSubmit">SignUp SignIn</button>
+        <span id="signSubmitResult" style="background: red" ></span>
+    </div>
+</div>
+</body>
+
+<script src="/plugin/jquery-1.12.4.min.js"></script>
+<script>
+    $(function () {
+        fetchCode()
+    })
+
+    //请求后端获取验证码图片
+    function fetchCode() {
+        $.get("/codeByBase64", function (data) {
+            //console.log(data)
+            $("#codeImg").attr("src", data.code)
+
+            //把UUID暂存起来，在请求后端的验证码正确性校验接口时需要携带
+            window.localStorage.setItem("uuid", data.uuid)
+        })
+    }
+    //点击刷新
+    $("#codeImg").click(function () {
+        fetchCode()
+    })
+
+    //发送短信验证码
+    $("#sendSmsCode").click(function () {
+        let uuid = window.localStorage.getItem("uuid")
+        let dataObj = {
+            "mobilePhone": $("#mobilePhone").val(),
+            "verifyCode": $("#verifyCode").val(),
+            "uuid": uuid
+        }
+
+        $.ajax("/sendSmsCode", {
+            method: 'POST',
+            async: true,
+            contentType: "application/json",
+            data: JSON.stringify(dataObj),
+            beforeSend: function () {
+                // alert("before send!")
+            },
+
+            dataType:"text",
+            success: function (res) {
+                // alert(res)
+                $("#sendSmsCodeResult").html(res)
+            },
+            error: function () {
+                // alert("error")
+            },
+            complete: function () {
+                // alert("complete")
+            }
+        })
+    });
+
+    //注册或登录提交
+    $("#signSubmit").click(function () {
+        let dataObj = {
+            "mobilePhone": $("#mobilePhone").val(),
+            "verifyCode": $("#verifyCode").val(),
+            "smsCode": $("#smsCode").val(),
+        }
+
+        $.ajax("/signUpSignInByMobileNumber", {
+            method: 'POST',
+            async: true,
+            contentType: "application/json",
+            data: JSON.stringify(dataObj),
+
+            dataType:"text",
+            success: function (res) {
+                // alert(res)
+                $("#signSubmitResult").html(res)
+            },
+            error: function () {
+                // alert("error")
+            },
+            complete: function () {
+                // alert("complete")
+            }
+        })
+    });
+</script>
+</html>
