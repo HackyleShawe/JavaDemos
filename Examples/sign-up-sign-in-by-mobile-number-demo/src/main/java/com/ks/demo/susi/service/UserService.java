@@ -18,6 +18,9 @@ public class UserService {
         return exists >= 1;
     }
 
+    /**
+     * 注册
+     */
     public boolean signUp(UserEntity userEntity) {
         int inserted = userMapper.insert(userEntity);
         return inserted == 1;

@@ -25,6 +25,18 @@ public class SignUpSignInService {
     @Autowired
     private ValueOperations<String, String> redisValueOperations;
 
+    private static final int SMS_REQUEST_COUNT_LIMIT = 2; //短信发送次数限制
+    private static final int SMS_REQUEST_COUNT_TIME = 10; //短信发送的时间限制
+    private static final String SMS_REQUEST_COUNT_PRE = "SMS_REQUEST_COUNT_";
+    private static final String SMS_CODE_PRE = "SMS_CODE_";
+
+
+    /**
+     * 发送短信验证码
+     * 1.检查图形验证码，检查通过才进行后续逻辑
+     * 2.检查该个手机号在某个时间内是否超过的发送次数
+     * 3.发送短信验证码，缓存，记录相关日志
+     */
     public String sendSmsCode(SignUpSignInDto signUpSignInDto) {
         String mobilePhone = signUpSignInDto.getMobilePhone();
         String verifyCode = signUpSignInDto.getVerifyCode();
@@ -33,12 +45,25 @@ public class SignUpSignInService {
         String res = "";
         boolean checked = kaptchaService.checkCode(uuid, verifyCode);
         if(checked) { //图形验证码检查通过，可以发送短信
+            //限制一段时间内短信验证码的请求次数（短信发送次数）
+            //例如：如10分钟内5次请求，Key=SMS_REQUEST_COUNT_手机号，Value=剩余次数
+            String requestCount = redisValueOperations.get(SMS_REQUEST_COUNT_PRE + mobilePhone);
+            if(StringUtils.isEmpty(requestCount)) {
+                redisValueOperations.set(SMS_REQUEST_COUNT_PRE+mobilePhone, "1", SMS_REQUEST_COUNT_TIME, TimeUnit.MINUTES);
+            } else {
+                int count = Integer.parseInt(requestCount) + 1;
+                if(count > SMS_REQUEST_COUNT_LIMIT) {
+                    return SMS_REQUEST_COUNT_TIME+"分钟内限制发送"+SMS_REQUEST_COUNT_LIMIT+"次短信验证码，请稍后重试";
+                }
+                redisValueOperations.set(SMS_REQUEST_COUNT_PRE+mobilePhone, String.valueOf(count));
+            }
+
             SendSmsDataDto sendSmsDataDto = new SendSmsDataDto();
             sendSmsDataDto.setPhone(mobilePhone);
             String smsCode = tencentSendSmsService.send(sendSmsDataDto);
             if(StringUtils.isNotEmpty(smsCode)) {
                 //缓存：以mobilePhone作为Key，后续在校验smsCode的时候，根据手机号获取
-                redisValueOperations.set(mobilePhone, smsCode, 60L, TimeUnit.SECONDS);
+                redisValueOperations.set(SMS_CODE_PRE+mobilePhone, smsCode, 60L, TimeUnit.SECONDS);
 
                 SmsRecordEntity smsRecordEntity = new SmsRecordEntity();
                 smsRecordEntity.setMobilePhone(mobilePhone);
@@ -59,12 +84,15 @@ public class SignUpSignInService {
         return res;
     }
 
+    /**
+     * 根据手机号进行登录，如果没有注册则自动进行注册
+     */
     public String signUpSignInByMobileNumber(SignUpSignInDto signUpSignInDto) {
         String mobilePhone = signUpSignInDto.getMobilePhone();
         String smsCode = signUpSignInDto.getSmsCode();
         String res = "";
 
-        String smsCodeRedis = redisValueOperations.get(mobilePhone);
+        String smsCodeRedis = redisValueOperations.get(SMS_CODE_PRE+mobilePhone);
         //注意：这里不要立即删除该电话号码对应的短信验证码，因为发送一次短信是非常珍贵的资源，
         //    校验短信验证码不通过可能是用户输入时看错了，给用户再次输入的机会
         //redisValueOperations.getOperations().delete(mobilePhone);
@@ -76,7 +104,7 @@ public class SignUpSignInService {
         if(smsCode.equalsIgnoreCase(smsCodeRedis)) {
             System.out.println("手机号mobilePhone="+mobilePhone+"，校验短信验证码通过");
         } else {
-            res = "手机号mobilePhone="+mobilePhone+"，校验短信验证码不通过";
+            res = "手机号"+mobilePhone+"短信验证码校验不通过";
             return res;
         }
 

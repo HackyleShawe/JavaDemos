@@ -17,7 +17,7 @@ public class TencentSendSmsService  implements SendSms {
             rand = random.nextInt(999999);
         } while (rand <= 100000);
         String smsCode = String.valueOf(rand);
-        System.out.println("腾讯云短信平台发送短信-成功-smsCode=" + smsCode);
+        System.out.println("腾讯云短信平台向" +sendSmsDataDto.getPhone()+"发送短信验证码成功-smsCode=" + smsCode);
         return smsCode;
     }
 }
