@@ -1,6 +1,6 @@
-- **Java Web开发中（Java EE、Spring生态）常用的项目骨架、示例、组件整合样例。**
+**Java Web开发中（Java EE、Spring生态）常用的业务开发解决方案、组件整合、技术使用示例、项目骨架。**
 
-- **Java Web(Java EE and Spring Ecosystem) Project Frameworks, Examples, Components Integration. For Beginner.**
+----
 
 **仓库的目标：**
 
@@ -10,9 +10,24 @@
 
 **重要说明**
 
-- 每个模块的详细说明、技术细节，在我的个人技术博客中（https://blog.hackyle.com）
+- 每个模块的详细说明、技术细节，在我的个人技术博客中：https://blog.hackyle.com
 - 本仓库只存储完整的代码
 - 每个模块的Readme文件中有最重要的关键说明
+
+**文件夹释义**
+
+- 业务开发解决方案（BusinessDevelopSolutions）
+  - 针对某一种业务场景，提出一些解决方案，并实现
+  - 例如，‘multi-options-storage-query-demo’就是针对多选项的存储与查询的业务场景，怎么快速查询的解决方案
+- 组件整合（ComponentsIntegration）
+  - 将某项技术整合Java或Spring生态
+  - 例如，‘springcache-redis’就是将SpringCache API与Redis的整合
+- 示例（Examples）
+  - 某项技术的基本用法的例子
+  - 例如，‘minio-demo’就是minio怎么使用的案例
+- 项目框架（ProjectFrameworks）
+  - 开发脚手架，可以基于此快速搭建起项目
+  - 例如，‘spring-springmvc-mybatis’就是一个整合SSM脚手架的基本项目
 
 **意义**
 
@@ -21,7 +36,20 @@
 - 代码片段或模板的**粒度要做到尽可能地小、依赖要尽可能地少**
 - 在浏览我的代码片段仓库时，建议使用一种快速阅览插件，我使用的是"Octotree - GitHub code tree"
 
+# Business Develop Solutions
 
+**multi-options-storage-query-demo**
+
+- 一种多选项的存储与高效查询的解决方案
+- 完整项目：[multi-options-storage-query-demo](./BusinessDevelopSolutions/multi-options-storage-query-demo)
+- ReadMe：[README.md](./BusinessDevelopSolutions/multi-options-storage-query-demo/README.md)
+
+**sign-up-sign-in-by-mobile-number-demo**
+
+- 通过手机号实现注册登录
+
+- 完整项目：[sign-up-sign-in-by-mobile-number-demo](./BusinessDevelopSolutions/sign-up-sign-in-by-mobile-number-demo)
+- ReadMe：[README.md](./BusinessDevelopSolutions/sign-up-sign-in-by-mobile-number-demo/README.md)
 
 # Components Integration
 
@@ -34,12 +62,13 @@
 - 完整项目：[springcache-redis](./ComponentsIntegration/springcache-redis)
 - 详细博文：https://blog.hackyle.com/article/java-demo/springcache-redis
 
-**valid-validated-demo**
+**frontend-maven-package-plugin-demo**
 
-- valid与validated的使用示例
-- valid是一种Java规范，Hibernate-validator对其进行了实现；validated是Spring的一种校验机制
-- 完整项目：[valid-validated-demo](./ComponentsIntegration/valid-validated-demo)
-- 详细博文：https://blog.hackyle.com/article/java-demo/valid-validated-demo
+- 前后端统一打包Maven插件
+- 完整项目：[frontend-maven-package-plugin-demo](./ComponentsIntegration/frontend-maven-package-plugin-demo)
+- ReadMe：[README.md](./ComponentsIntegration/frontend-maven-package-plugin-demo/README.md)
+
+
 
 # Examples
 
@@ -64,13 +93,12 @@
 - 完整项目：[shiro-demo](./Examples/shiro-demo)
 - ReadMe：[README.md](./Examples/shiro-demo/README.md)
 
-**multi-options-storage-query-demo**
+**valid-validated-demo**
 
-- 一种多选项的存储与高效查询的解决方案
-- 完整项目：[multi-options-storage-query-demo](./Examples/multi-options-storage-query-demo)
-- ReadMe：[README.md](./Examples/multi-options-storage-query-demo/README.md)
-
-
+- valid与validated的使用示例
+- valid是一种Java规范，Hibernate-validator对其进行了实现；validated是Spring的一种校验机制
+- 完整项目：[valid-validated-demo](./Examples/valid-validated-demo)
+- 详细博文：https://blog.hackyle.com/article/java-demo/valid-validated-demo
 
 ## 验证码
 
@@ -98,15 +126,6 @@
 
 
 
-## 登录认证
-
-**sign-up-sign-in-by-mobile-number-demo**
-
-- 通过手机号实现注册登录
-
-- 完整项目：[sign-up-sign-in-by-mobile-number-demo](./Examples/sign-up-sign-in-by-mobile-number-demo)
-- ReadMe：[README.md](./Examples/sign-up-sign-in-by-mobile-number-demo/README.md)
-
 
 
 # Project Frameworks
@@ -119,9 +138,5 @@
 - 完整项目：[spring-springmvc-mybatis](./ProjectFrameworks/spring-springmvc-mybatis)
 - ReadMe：[README.md](./ProjectFrameworks/spring-springmvc-mybatis/README.md)
 
-**frontend-maven-package-plugin-demo**
 
-- 前后端统一打包Maven插件
-- 完整项目：[frontend-maven-package-plugin-demo](./ProjectFrameworks/frontend-maven-package-plugin-demo)
-- ReadMe：[README.md](./ProjectFrameworks/frontend-maven-package-plugin-demo/README.md)
 

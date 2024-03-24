@@ -15,6 +15,7 @@ public class RedisAutoConfigure {
      */
     @Bean
     public Jedis jedis(RedisProperties redisProperties){
+        //System.out.println("在项目启动的时候就实例化这个类");
         return new Jedis(redisProperties.getHost(), redisProperties.getPort());
     }
 }
