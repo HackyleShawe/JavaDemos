@@ -100,6 +100,11 @@
 - 完整项目：[valid-validated-demo](./Examples/valid-validated-demo)
 - 详细博文：https://blog.hackyle.com/article/java-demo/valid-validated-demo
 
+**QR-code-zxing-demo**
+
+- 二维码的生成与解析开源工具zxing的使用示例
+- 完整项目：[QR-code-zxing-demo](./Examples/QR-code-zxing-demo)
+
 ## 验证码
 
 **kaptcha-demo**
